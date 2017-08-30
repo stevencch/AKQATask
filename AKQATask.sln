@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.10
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AKQATask", "AKQATask\AKQATask.csproj", "{EB566D25-4249-4BA1-8AA8-925BF563BC1A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EB566D25-4249-4BA1-8AA8-925BF563BC1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB566D25-4249-4BA1-8AA8-925BF563BC1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB566D25-4249-4BA1-8AA8-925BF563BC1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB566D25-4249-4BA1-8AA8-925BF563BC1A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3DB46AD2-AD23-48B3-BCE6-97628933DE56}
+	EndGlobalSection
+EndGlobal
