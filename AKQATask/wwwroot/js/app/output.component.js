@@ -20,7 +20,7 @@ var OutputComponent = (function () {
     }
     OutputComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.subscription = this.data.currentMessage.subscribe(function (x) {
+        this.subscription = this.data.currentInfo.subscribe(function (x) {
             if (x == null) {
                 _this.info = new app_model_js_1.InfoModel();
                 _this.info.name = '';

@@ -17,13 +17,30 @@ var InputComponent = (function () {
     function InputComponent(appService, data) {
         this.appService = appService;
         this.data = data;
+        this.selectedCulture = 'en';
         this.info = new app_model_js_1.InfoModel();
         this.info.name = '';
         this.info.number = '';
     }
+    InputComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.subscription = this.data.httpMessage.subscribe(function (x) {
+            _this.message = x;
+        });
+    };
+    InputComponent.prototype.onNumberChange = function (value) {
+        var myRe = /[^0-9,.]/;
+        var isMatched = myRe.test(value);
+        if (isMatched) {
+            this.numberValidation = 'Invalid Number';
+        }
+        else {
+            this.numberValidation = '';
+        }
+    };
     InputComponent.prototype.convert = function () {
         var _this = this;
-        this.appService.post(this.info)
+        this.appService.post(this.info, this.selectedCulture)
             .then(function (response) {
             if (response.success) {
                 var info = new app_model_js_1.InfoModel();

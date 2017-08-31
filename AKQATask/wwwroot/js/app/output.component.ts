@@ -21,7 +21,7 @@ export class OutputComponent {
     }
 
     public ngOnInit(): void {
-        this.subscription = this.data.currentMessage.subscribe((x: any) => {
+        this.subscription = this.data.currentInfo.subscribe((x: any) => {
             if (x == null) {
                 this.info = new InfoModel();
                 this.info.name = '';

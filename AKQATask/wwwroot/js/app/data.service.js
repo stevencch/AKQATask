@@ -10,11 +10,17 @@ var core_1 = require("@angular/core");
 var BehaviorSubject_1 = require("rxjs/BehaviorSubject");
 var DataService = (function () {
     function DataService() {
+        this.cultures = ['en', 'fr'];
+        this.httpSource = new BehaviorSubject_1.BehaviorSubject('');
+        this.httpMessage = this.httpSource.asObservable();
         this.messageSource = new BehaviorSubject_1.BehaviorSubject(null);
-        this.currentMessage = this.messageSource.asObservable();
+        this.currentInfo = this.messageSource.asObservable();
     }
     DataService.prototype.broadcastChange = function (input) {
         this.messageSource.next(input);
+    };
+    DataService.prototype.broadcastHttpMessage = function (input) {
+        this.httpSource.next(input);
     };
     return DataService;
 }());

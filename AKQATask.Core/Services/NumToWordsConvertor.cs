@@ -7,37 +7,45 @@ using System.Threading.Tasks;
 
 namespace AKQATask.Core.Services
 {
-    public class NumToWordsConvertor : INumToWordsConvertor
+    public class NumToWordsConvertor : AbstractConvertor
     {
         private static readonly string[] singleWords = { "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen" };
         private static readonly string[] tenTimesWords = { "zero", "ten", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety" };
 
-        public string ConvertToWords(double number)
+        public override async Task<string> ConvertToWords(double number)
         {
-            var result = string.Empty;
-            var rightNum = (long)number;
-            var leftNum =(long)Math.Round(number*100, 0, MidpointRounding.AwayFromZero)%100;
-            var leftS = (leftNum == 1)?"":"s";
-            var rightS = (rightNum == 0 || rightNum == 1)?"":"s";
-            if (leftNum == 0)
+            var words=await Task.Run<string>(() =>
             {
-                result = $"{Convert(rightNum)} Dollar{rightS}";
-            }
-            else
-            {
-                result = $"{Convert(rightNum)} Dollar{rightS} and {Convert(leftNum)} Cent{leftS}";
-            }
-            return result.ToLower();
+                var result = string.Empty;
+                var minus = "";
+                if (number < 0)
+                {
+                    minus = "minus ";
+                    number = -number;
+                }
+                var rightNum = (long)number;
+                var leftNum = (long)Math.Round(number * 100, 0, MidpointRounding.AwayFromZero) % 100;
+                var leftS = (leftNum == 1) ? "" : "s";
+                var rightS = (rightNum == 0 || rightNum == 1) ? "" : "s";
+                
+                if (leftNum == 0)
+                {
+                    result = $"{minus}{Convert(rightNum)} dollar{rightS}";
+                }
+                else
+                {
+                    result = $"{minus}{Convert(rightNum)} dollar{rightS} and {Convert(leftNum)} cent{leftS}";
+                }
+                return result.ToLower();
+            });
+            return words;
         }
 
         private string Convert(long number)
         {
             string result = string.Empty;
-            if (number < 0)
-            {
-                result = $"minus {Convert(-number)}";
-            }
-            else if (number == 0)
+            
+            if (number == 0)
             {
                 result = singleWords[number];
             }

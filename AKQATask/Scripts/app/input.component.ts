@@ -1,4 +1,4 @@
-﻿import { Component } from '@angular/core';
+﻿import { Component, OnInit } from '@angular/core';
 
 import { AppService } from './app.service.js';
 
@@ -19,14 +19,36 @@ export class InputComponent {
 
     public message: string;
 
+    public numberValidation: string;
+
+    public selectedCulture: string = 'en';
+
     constructor(private appService: AppService, private data: DataService) {
         this.info = new InfoModel();
         this.info.name = '';
         this.info.number = '';
     }
 
+    public ngOnInit(): void {
+        this.subscription = this.data.httpMessage.subscribe(
+            (x: any) => {
+            this.message = x as string;
+        });
+    }
+
+    public onNumberChange(value: string): void {
+        const myRe = /[^0-9,.]/;
+        const isMatched = myRe.test(value);
+        if (isMatched) {
+            this.numberValidation = 'Invalid Number';
+        }
+        else {
+            this.numberValidation = '';
+        }
+    }
+
     public convert(): void {
-        this.appService.post(this.info)
+        this.appService.post(this.info, this.selectedCulture)
             .then(response => {
                 if (response.success) {
                     const info = new InfoModel();

@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using AKQATask.Contract.Interfaces;
 using AKQATask.Core.Services;
+using AKQATask.Contract.Exceptions;
 
 namespace AKQATask.Test
 {
@@ -16,6 +17,7 @@ namespace AKQATask.Test
             convertor = new NumToWordsConvertor();
         }
         [TestMethod]
+        [DataRow(-1234567890.12, "minus one billion two hundred and thirty-four million five hundred and sixty-seven thousand eight hundred and ninety dollars and twelve cents")]
         [DataRow(0, "zero dollar")]
         [DataRow(1, "one dollar")]
         [DataRow(2, "two dollars")]
@@ -36,8 +38,32 @@ namespace AKQATask.Test
         [DataRow(111111111111, "one hundred and eleven billion one hundred and eleven million one hundred and eleven thousand one hundred and eleven dollars")]
         public void TestNumberToWords(double input,string output)
         {
-            var actual = convertor.ConvertToWords(input);
+            var actual = convertor.ConvertToWords(input).Result;
+            Assert.IsTrue(actual== output);
+        }
+
+        [TestMethod]
+        [DataRow("1,234.12", "one thousand two hundred and thirty-four dollars and twelve cents")]
+        public void TestNumberStringToWords(string input, string output)
+        {
+            var actual = convertor.ConvertToWords(input).Result;
             Assert.IsTrue(actual == output);
+        }
+
+        [TestMethod()]
+        [ExpectedException(typeof(InvaildNumberException))]
+        [DataRow("abc123", "na")]
+        [DataRow("1999999999999.999", "na")]
+        public void TestInvaildNumberException(string input, string output)
+        {
+            try
+            {
+                var actual = convertor.ConvertToWords(input).Result;
+            }
+            catch(AggregateException ex)
+            {
+                throw ex.InnerException;
+            }
         }
     }
 }

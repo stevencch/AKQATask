@@ -48,8 +48,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extentions\AppUtils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\AbstractConvertor.cs" />
     <Compile Include="Services\NumToWordsConvertor.cs" />
+    <Compile Include="Services\NumToWordsConvertorFactory.cs" />
+    <Compile Include="Services\NumToWordsConvertorFr.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

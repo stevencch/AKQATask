@@ -10,25 +10,31 @@ export class AppService {
     private headers: Headers = new Headers({ 'Content-Type': 'application/json' });
     private apiUrl: string = '/api/app';  // URL to web api
 
-    constructor(private http: Http) {
-
+    constructor(private http: Http, private data: DataService) {
     }
 
-    public post(data: InfoModel): Promise<ResultModel> {
+    public post(data: InfoModel, culture: string): Promise<ResultModel> {
+        if (culture !== '') {
+            this.headers.append('Accept-Language', culture);
+        }
         const url = this.apiUrl + '/convert';
         return this.http
             .post(url, JSON.stringify(data), { headers: this.headers })
             .toPromise()
             .then(
-            res => res.json() as ResultModel
+            res => {
+                this.data.broadcastHttpMessage('200 OK');
+                return res.json() as ResultModel;
+            }
             )
-            .catch(this.handleError);
-    }
-
-    private handleError(error: any): Promise<any> {
-        if (console) {
-            console.error('An error occurred', error);
-        }
-        return Promise.reject(error.message || error);
+            .catch(
+            error => {
+                if (console) {
+                    console.error('An error occurred', error);
+                }
+                this.data.broadcastHttpMessage('failed to post the data.');
+                return Promise.reject(error.message || error);
+            }
+            );
     }
 }

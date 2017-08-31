@@ -40,7 +40,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppSettings.cs" />
+    <Compile Include="EnumCulture.cs" />
+    <Compile Include="Exceptions\InvaildNumberException.cs" />
     <Compile Include="Interfaces\INumToWordsConvertor.cs" />
+    <Compile Include="Interfaces\INumToWordsConvertorFactory.cs" />
     <Compile Include="Models\InfoModel.cs" />
     <Compile Include="Models\ResultModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
