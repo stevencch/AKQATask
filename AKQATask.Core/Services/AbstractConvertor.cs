@@ -17,7 +17,8 @@ namespace AKQATask.Core.Services
         public async Task<string> ConvertToWords(string number)
         {
             double value;
-            if(double.TryParse(number,out value)){
+            number = number.Replace(",", "").Replace(" ", "");
+            if (double.TryParse(number,out value)){
                 if (value > AppSettings.MAX_NUMBER)
                 {
                     throw new InvaildNumberException($"{number} is over the max value.");

@@ -54,7 +54,7 @@ namespace AKQATask.Controllers.Api
                         Result = new InfoModel()
                         {
                             Name = info.Name,
-                            Number = words
+                            Number = words.ToUpper()
                         }
                     };
 
