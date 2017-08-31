@@ -12,7 +12,7 @@ var convertor_component_js_1 = require("./convertor.component.js");
 var info_component_js_1 = require("./info.component.js");
 var routes = [
     { path: '', component: convertor_component_js_1.ConvertorComponent },
-    { path: 'convertor', component: convertor_component_js_1.ConvertorComponent },
+    { path: 'converter', component: convertor_component_js_1.ConvertorComponent },
     { path: 'info', component: info_component_js_1.InfoComponent }
 ];
 var AppRoutingModule = (function () {

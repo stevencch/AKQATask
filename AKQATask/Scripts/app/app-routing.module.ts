@@ -5,7 +5,7 @@ import { InfoComponent } from './info.component.js';
 
 const routes: Routes = [
     { path: '', component: ConvertorComponent },
-    { path: 'convertor', component: ConvertorComponent },
+    { path: 'converter', component: ConvertorComponent },
     { path: 'info', component: InfoComponent }
 ];
 

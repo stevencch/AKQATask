@@ -11,7 +11,7 @@ var AppComponent = (function () {
     function AppComponent() {
     }
     AppComponent.prototype.ngOnInit = function () {
-        this.title = 'Number To Words Convertor';
+        this.title = 'Number To Words Converter';
     };
     return AppComponent;
 }());
