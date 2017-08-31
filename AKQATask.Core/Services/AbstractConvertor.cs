@@ -1,9 +1,11 @@
 ﻿using AKQATask.Contract;
 using AKQATask.Contract.Exceptions;
 using AKQATask.Contract.Interfaces;
+using AKQATask.Core.Extentions;
 using NLog;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,7 +20,7 @@ namespace AKQATask.Core.Services
         {
             double value;
             number = number.Replace(",", "").Replace(" ", "");
-            if (double.TryParse(number,out value)){
+            if (double.TryParse(number, NumberStyles.Any, new CultureInfo(EnumCulture.en_US.GetDescription()),out value)){
                 if (value > AppSettings.MAX_NUMBER)
                 {
                     throw new InvaildNumberException($"{number} is over the max value.");
