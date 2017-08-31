@@ -35,18 +35,17 @@ export class InputComponent {
             this.message = x as string;
         });
     }
-
+    //validation
     public onNumberChange(value: string): void {
         const myRe = /[^0-9,.]/;
         const isMatched = myRe.test(value);
         if (isMatched) {
             this.numberValidation = 'Invalid Number';
-        }
-        else {
+        }else {
             this.numberValidation = '';
         }
     }
-
+    //http post
     public convert(): void {
         this.appService.post(this.info, this.selectedCulture)
             .then(response => {

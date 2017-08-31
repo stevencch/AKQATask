@@ -28,6 +28,7 @@ var InputComponent = (function () {
             _this.message = x;
         });
     };
+    //validation
     InputComponent.prototype.onNumberChange = function (value) {
         var myRe = /[^0-9,.]/;
         var isMatched = myRe.test(value);
@@ -38,6 +39,7 @@ var InputComponent = (function () {
             this.numberValidation = '';
         }
     };
+    //http post
     InputComponent.prototype.convert = function () {
         var _this = this;
         this.appService.post(this.info, this.selectedCulture)

@@ -9,6 +9,6 @@ export class AppComponent implements OnInit {
     public title: string ;
 
     public ngOnInit(): void {
-        this.title = 'Number Convertor';
+        this.title = 'Number To Words Convertor';
     }
 }

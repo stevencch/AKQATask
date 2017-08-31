@@ -10,6 +10,11 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Localization;
 using Microsoft.AspNetCore.Mvc.Localization;
 using Microsoft.AspNetCore.Localization;
+using System.Net.Http;
+using System.Net;
+using Newtonsoft.Json;
+using System.Text;
+using AKQATask.Contract.Exceptions;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -30,23 +35,49 @@ namespace AKQATask.Controllers.Api
             this.logger = logger;
         }
 
-        // POST api/values
+        // POST Convert the input data
         [HttpPost("convert")]
-        public async Task<ResultModel> Convert([FromBody]InfoModel info)
+        public async Task<IActionResult> Convert([FromBody]InfoModel info)
         {
-            var culture= this.HttpContext.Features.Get<IRequestCultureFeature>();
-            var numToWordsConvertor = numToWordsConvertorFactory.CreateConvertor(culture.RequestCulture.Culture);
-            var words =await numToWordsConvertor.ConvertToWords(info.Number);
-            return new ResultModel()
+            try
             {
-                Success = true,
-                Message = "Success",
-                Result = new InfoModel()
+                if (ModelState.IsValid)
                 {
-                    Name = info.Name,
-                    Number = words
+                    var culture = this.HttpContext.Features.Get<IRequestCultureFeature>();
+                    //get convertor based on culture
+                    var numToWordsConvertor = numToWordsConvertorFactory.CreateConvertor(culture.RequestCulture.Culture);
+                    var words = await numToWordsConvertor.ConvertToWords(info.Number);
+                    var result = new ResultModel()
+                    {
+                        Success = true,
+                        Message = "Success",
+                        Result = new InfoModel()
+                        {
+                            Name = info.Name,
+                            Number = words
+                        }
+                    };
+
+                    return Ok(result);
                 }
-            };
+                else
+                {
+                    logger.LogWarning("Invalid Data");
+                    return BadRequest("Invalid data");
+                }
+            }
+            catch (InvaildNumberException iex)
+            {
+                logger.LogWarning(iex.Message);
+                return BadRequest(iex.Message);
+            }
+            catch (Exception ex)
+            {
+                logger.LogError("failed to post", ex);
+                return BadRequest("Server is unavailable, please try again later");
+            }
+
+
         }
     }
 }

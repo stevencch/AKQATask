@@ -20,9 +20,11 @@ var AppService = (function () {
         this.headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         this.apiUrl = '/api/app'; // URL to web api
     }
+    //http post method
     AppService.prototype.post = function (data, culture) {
         var _this = this;
         if (culture !== '') {
+            this.headers.delete('Accept-Language');
             this.headers.append('Accept-Language', culture);
         }
         var url = this.apiUrl + '/convert';
@@ -30,14 +32,15 @@ var AppService = (function () {
             .post(url, JSON.stringify(data), { headers: this.headers })
             .toPromise()
             .then(function (res) {
-            _this.data.broadcastHttpMessage('200 OK');
+            _this.data.broadcastHttpMessage('Succeed');
             return res.json();
         })
             .catch(function (error) {
             if (console) {
                 console.error('An error occurred', error);
             }
-            _this.data.broadcastHttpMessage('failed to post the data.');
+            var msg = error._body;
+            _this.data.broadcastHttpMessage('Error: ' + msg);
             return Promise.reject(error.message || error);
         });
     };

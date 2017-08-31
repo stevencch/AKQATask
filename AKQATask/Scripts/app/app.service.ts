@@ -12,9 +12,10 @@ export class AppService {
 
     constructor(private http: Http, private data: DataService) {
     }
-
+    //http post method
     public post(data: InfoModel, culture: string): Promise<ResultModel> {
         if (culture !== '') {
+            this.headers.delete('Accept-Language');
             this.headers.append('Accept-Language', culture);
         }
         const url = this.apiUrl + '/convert';
@@ -23,7 +24,7 @@ export class AppService {
             .toPromise()
             .then(
             res => {
-                this.data.broadcastHttpMessage('200 OK');
+                this.data.broadcastHttpMessage('Succeed');
                 return res.json() as ResultModel;
             }
             )
@@ -32,7 +33,8 @@ export class AppService {
                 if (console) {
                     console.error('An error occurred', error);
                 }
-                this.data.broadcastHttpMessage('failed to post the data.');
+                const msg = error._body;
+                this.data.broadcastHttpMessage('Error: ' + msg);
                 return Promise.reject(error.message || error);
             }
             );

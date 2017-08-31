@@ -1,6 +1,7 @@
 ﻿using AKQATask.Contract;
 using AKQATask.Contract.Exceptions;
 using AKQATask.Contract.Interfaces;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
