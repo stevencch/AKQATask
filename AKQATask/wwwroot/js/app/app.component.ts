@@ -1,19 +1,14 @@
-import { Component, OnInit, ApplicationRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
     selector: 'my-app',
-    templateUrl: '../../js/app/html/app.html',
-    styleUrls: ['../../js/app/css/app.css']
+    templateUrl: '/js/app/html/app.html',
+    styleUrls: ['/js/app/css/app.css']
 })
 export class AppComponent implements OnInit {
-    public title: string = 'Action Services Configuration';
-    public message: string = '';
-    public instanceId: string = '';
-    public assetId: string = '';
-    constructor(private appRef: ApplicationRef) {
-    }
+    public title: string ;
 
     public ngOnInit(): void {
-        this.message = 'a';
+        this.title = 'Number Convertor';
     }
 }

@@ -1,1 +1,8 @@
 ﻿<h4 class="header">{{title}}</h4>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <a class="btn btn-info  btn-sm active" [routerLink]="['/convertor']" routerLinkActive="active"><span class="glyphicon glyphicon-user"></span> Convertor</a>
+        <a class="btn btn-info  btn-sm" [routerLink]="['/info']" routerLinkActive="active"><span class="glyphicon glyphicon-tag"></span> Info</a>
+    </div>
+</div>
+<router-outlet></router-outlet>

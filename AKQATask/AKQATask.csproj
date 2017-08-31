@@ -6,7 +6,23 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Scripts\app\app-routing.module.js" />
+    <None Remove="Scripts\app\app-routing.module.js.map" />
     <None Remove="Scripts\app\app.component.ts" />
+    <None Remove="Scripts\app\app.model.js" />
+    <None Remove="Scripts\app\app.model.js.map" />
+    <None Remove="Scripts\app\app.service.js" />
+    <None Remove="Scripts\app\app.service.js.map" />
+    <None Remove="Scripts\app\convertor.component.js" />
+    <None Remove="Scripts\app\convertor.component.js.map" />
+    <None Remove="Scripts\app\data.service.js" />
+    <None Remove="Scripts\app\data.service.js.map" />
+    <None Remove="Scripts\app\info.component.js" />
+    <None Remove="Scripts\app\info.component.js.map" />
+    <None Remove="Scripts\app\input.component.js" />
+    <None Remove="Scripts\app\input.component.js.map" />
+    <None Remove="Scripts\app\output.component.js" />
+    <None Remove="Scripts\app\output.component.js.map" />
   </ItemGroup>
 
   <ItemGroup>
@@ -16,6 +32,7 @@
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="1.1.2" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="1.1.2" />
     <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="1.1.2" />
+    <PackageReference Include="NLog.Web.AspNetCore" Version="4.4.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -29,6 +46,11 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\js\app\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AKQATask.Contract\AKQATask.Contract.csproj" />
+    <ProjectReference Include="..\AKQATask.Core\AKQATask.Core.csproj" />
   </ItemGroup>
 
 </Project>

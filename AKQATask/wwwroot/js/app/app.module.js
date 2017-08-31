@@ -11,6 +11,13 @@ var platform_browser_1 = require("@angular/platform-browser");
 var forms_1 = require("@angular/forms"); // <-- NgModel lives here
 var http_1 = require("@angular/http");
 var app_component_js_1 = require("./app.component.js");
+var convertor_component_js_1 = require("./convertor.component.js");
+var info_component_js_1 = require("./info.component.js");
+var input_component_js_1 = require("./input.component.js");
+var output_component_js_1 = require("./output.component.js");
+var app_service_js_1 = require("./app.service.js");
+var data_service_js_1 = require("./data.service.js");
+var app_routing_module_js_1 = require("./app-routing.module.js");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -21,11 +28,17 @@ AppModule = __decorate([
         imports: [
             platform_browser_1.BrowserModule,
             forms_1.FormsModule,
-            http_1.HttpModule
+            http_1.HttpModule,
+            app_routing_module_js_1.AppRoutingModule
         ],
         declarations: [
-            app_component_js_1.AppComponent
+            app_component_js_1.AppComponent,
+            convertor_component_js_1.ConvertorComponent,
+            info_component_js_1.InfoComponent,
+            input_component_js_1.InputComponent,
+            output_component_js_1.OutputComponent
         ],
+        providers: [app_service_js_1.AppService, data_service_js_1.DataService],
         bootstrap: [app_component_js_1.AppComponent]
     })
 ], AppModule);
